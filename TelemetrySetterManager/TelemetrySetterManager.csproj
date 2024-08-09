@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="settings.json" />
+      <Content Include="settings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FileSaver\FileSaver.csproj" />
+      <ProjectReference Include="..\OpenTelemetrySetter\OpenTelemetrySetter.csproj" />
+      <ProjectReference Include="..\TelemetrySetterBase\TelemetrySetterBase.csproj" />
+    </ItemGroup>
+
+</Project>

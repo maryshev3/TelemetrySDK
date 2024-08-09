@@ -1,0 +1,8 @@
+{
+  "ServicesForTakeTelemetry": [
+    "Npgsql"
+  ],
+  "TagsToSave": [
+    "db.statement"
+  ]
+}

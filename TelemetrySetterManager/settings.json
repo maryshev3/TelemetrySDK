@@ -1,0 +1,4 @@
+{
+  "SaverType": "FileSaver",
+  "TelemetrySetterType": "OpenTelemetrySetter"
+}

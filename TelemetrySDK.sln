@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemetrySetterBase", "TelemetrySetterBase\TelemetrySetterBase.csproj", "{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSaver", "FileSaver\FileSaver.csproj", "{BD4AC402-A06B-4092-B53A-EF01792C470F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Savers", "Savers", "{E5BCC304-E7A3-4C81-93AE-6050302BF0B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TelemetrySetters", "TelemetrySetters", "{87445E0C-633B-482A-8D4C-57861814EE08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetrySetter", "OpenTelemetrySetter\OpenTelemetrySetter.csproj", "{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemetrySetterManager", "TelemetrySetterManager\TelemetrySetterManager.csproj", "{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TelemetryCollectors", "TelemetryCollectors", "{CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectorBase", "CollectorBase\CollectorBase.csproj", "{4EDD9C03-C766-419E-99C1-51635EF680BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectorConsole", "CollectorConsole\CollectorConsole.csproj", "{83F6382D-76E7-4864-8647-17675D0B0D6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD4AC402-A06B-4092-B53A-EF01792C470F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD4AC402-A06B-4092-B53A-EF01792C470F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD4AC402-A06B-4092-B53A-EF01792C470F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD4AC402-A06B-4092-B53A-EF01792C470F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EDD9C03-C766-419E-99C1-51635EF680BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDD9C03-C766-419E-99C1-51635EF680BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDD9C03-C766-419E-99C1-51635EF680BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDD9C03-C766-419E-99C1-51635EF680BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD4AC402-A06B-4092-B53A-EF01792C470F} = {E5BCC304-E7A3-4C81-93AE-6050302BF0B7}
+		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3} = {87445E0C-633B-482A-8D4C-57861814EE08}
+		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3} = {87445E0C-633B-482A-8D4C-57861814EE08}
+		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0} = {87445E0C-633B-482A-8D4C-57861814EE08}
+		{4EDD9C03-C766-419E-99C1-51635EF680BE} = {CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}
+		{83F6382D-76E7-4864-8647-17675D0B0D6A} = {CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}
+	EndGlobalSection
+EndGlobal

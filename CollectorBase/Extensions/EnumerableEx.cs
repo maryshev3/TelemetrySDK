@@ -31,6 +31,27 @@ public static class EnumerableEx
         var ids = telemetryItemsCopy.Select(x => x.Id).ToHashSet();
 
         // Список "корневых" элементов.
-        return telemetryItemsCopy.Where(x => !ids.Contains(x.ParentId));
+        return telemetryItemsCopy.Where(x => !ids.Contains(x.ParentId)).ToArray();
+    }
+
+    /// <summary>
+    /// Создаёт плоский список активностей из древовидного
+    /// </summary>
+    /// <param name="telemetryItems">Древовидный список телеметрии</param>
+    /// <returns>Плоский список телеметрии</returns>
+    public static IEnumerable<TelemetryItem> CreateFlat(this IEnumerable<TelemetryItem> telemetryItems)
+    {
+        List<TelemetryItem> result = new();
+
+        if (!telemetryItems.Any())
+        {
+            return result;
+        }
+        
+        result.AddRange(telemetryItems);
+
+        result.AddRange(telemetryItems.SelectMany(x => x.Childrens.CreateFlat()));
+
+        return result;
     }
 }

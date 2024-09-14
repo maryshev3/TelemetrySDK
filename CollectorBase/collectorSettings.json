@@ -1,0 +1,8 @@
+{
+  "Statistic": {
+    "SourcesBlackList": [
+      "Microsoft.AspNetCore",
+      ""
+    ]
+  }
+}

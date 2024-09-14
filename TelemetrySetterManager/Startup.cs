@@ -32,14 +32,11 @@ public static class Startup
 
     private static void RunTelemetrySetter(TelemetrySetterType telemetrySetterType, ISaveManager saveManager)
     {
-        // Считываем настройки сеттера телеметрии.
-        TelemetrySetterBase.Settings settings = new TelemetrySetterBase.Settings().Init();
-        
         // Запускаем сбор телеметрии.
         switch (telemetrySetterType)
         {
             case TelemetrySetterType.OpenTelemetrySetter:
-                new OpenTelemetryActivitySetter(saveManager, settings.ServicesForTakeTelemetry, settings.TagsToSave).Start();
+                new OpenTelemetryActivitySetter(saveManager).Start();
                 break;
         }
     }

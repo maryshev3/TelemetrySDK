@@ -10,21 +10,17 @@ namespace TelemetrySetterBase;
 public abstract class ActivitySetter<T> where T: class
 {
     protected readonly ISaveManager _saveManager;
-    protected readonly IEnumerable<string> _servicesForTakeTelemetry;
-    protected readonly IEnumerable<string> _tagsToSave;
 
-    protected ActivitySetter(ISaveManager saveManager, IEnumerable<string> servicesForTakeTelemetry, IEnumerable<string> tagsToSave)
+    protected ActivitySetter(ISaveManager saveManager)
     {
         _saveManager = saveManager;
-        _servicesForTakeTelemetry = servicesForTakeTelemetry;
-        _tagsToSave = tagsToSave;
     }
 
-    protected abstract TelemetryItem ToTelemetryItem(T telemetry, IEnumerable<string> tagsToSave);
+    protected abstract TelemetryItem ToTelemetryItem(T telemetry);
 
     protected void OnActivityEnd(T telemetry)
     {
-        TelemetryItem converted = this.ToTelemetryItem(telemetry, _tagsToSave);
+        TelemetryItem converted = this.ToTelemetryItem(telemetry);
         
         _saveManager.Save(converted);
     }

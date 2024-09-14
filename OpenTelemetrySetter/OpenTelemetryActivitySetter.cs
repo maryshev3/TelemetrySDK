@@ -9,14 +9,12 @@ namespace OpenTelemetrySetter;
 public class OpenTelemetryActivitySetter : ActivitySetter<Activity>
 {
     public OpenTelemetryActivitySetter(
-        ISaveManager saveManager,
-        IEnumerable<string> servicesForTakeTelemetry,
-        IEnumerable<string> tagsToSave
-    ) : base(saveManager, servicesForTakeTelemetry, tagsToSave)
+        ISaveManager saveManager
+    ) : base(saveManager)
     {
     }
 
-    protected override TelemetryItem ToTelemetryItem(Activity telemetry, IEnumerable<string> tagsToSave) => new TelemetryItem()
+    protected override TelemetryItem ToTelemetryItem(Activity telemetry) => new TelemetryItem()
         {
             Id = telemetry.Id,
             ParentId = telemetry.ParentId,
@@ -24,18 +22,19 @@ public class OpenTelemetryActivitySetter : ActivitySetter<Activity>
             ActivityName = telemetry.DisplayName,
             ActivityStart = telemetry.StartTimeUtc,
             ActivityDuration = telemetry.Duration,
-            Tags = telemetry.Tags.Where(x => tagsToSave.Contains(x.Key)).ToArray()
+            Tags = telemetry.Tags.ToArray()
         };
     
     // Функции-callback на начало, конец активности.
     private void ActivityEnd(Activity activity) => this.OnActivityEnd(activity);
     private ActivitySamplingResult Sample(ref ActivityCreationOptions<ActivityContext> context) => ActivitySamplingResult.AllData;
     
-    public override void Start()
-    {
-        foreach (var serviceName in _servicesForTakeTelemetry)
-        {
-            ActivitySource.AddActivityListener(serviceName.ToActivityListener(ActivityEnd, Sample));
-        }
-    }
+    public override void Start() =>
+        ActivitySource.AddActivityListener(new ActivityListener()
+            {
+                ShouldListenTo = activitySource => true,
+                ActivityStopped = ActivityEnd,
+                Sample = Sample
+            }
+        );
 }

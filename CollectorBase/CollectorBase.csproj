@@ -10,4 +10,10 @@
       <ProjectReference Include="..\TelemetrySetterBase\TelemetrySetterBase.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="collectorSettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

@@ -10,7 +10,7 @@ public static class StringExtensions
         SampleActivity<ActivityContext> sample
     ) => new ActivityListener()
         {
-            ShouldListenTo = activitySource => activitySource.Name == serviceName,
+            ShouldListenTo = activitySource => true,
             ActivityStopped = activityStoped,
             Sample = sample
         };

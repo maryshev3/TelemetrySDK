@@ -1,13 +1,19 @@
-using System.Collections.Concurrent;
-using System.Diagnostics;
 using CollectorBase.Extensions;
+using CollectorBase.Models;
 using TelemetrySetterBase.Models;
 
-namespace CollectorConsole;
+namespace CollectorBase.Statistic;
 
-public static class TelemetryStatistic
+public class TelemetryStatistic
 {
-    private static TimeSpan GetDbTime(TelemetryItem telemetryItem)
+    private readonly Settings _settings;
+
+    public TelemetryStatistic(Settings settings)
+    {
+        _settings = settings;
+    }
+    
+    private TimeSpan GetDbTime(TelemetryItem telemetryItem)
     {
         if (telemetryItem.SourceName == "Npgsql")
             return telemetryItem.ActivityDuration;
@@ -21,18 +27,28 @@ public static class TelemetryStatistic
 
         return accumulator;
     }
+
+    private TelemetryItem[] PreprocessTelemetries(TelemetryItem[] telemetryItems) =>
+        telemetryItems
+            .CreateFlat()
+            .Where(x => !_settings.Statistic.SourcesBlackList.Contains(x.SourceName))
+            .CreateTree()
+            .ToArray();
     
-    public static async Task<Statistic[]> CreateStatistic(TelemetryItem[] telemetryItems)
+    public async Task<Report> CreateReport(TelemetryItem[] telemetryItems)
     {
+        // Отсеиваем ненужные активности.
+        telemetryItems = PreprocessTelemetries(telemetryItems);
+        
         // Группируем.
         var groups = telemetryItems.GroupBy(x => (x.SourceName, x.ActivityName)).ToArray();
 
-        List<Task<Statistic>> tasks = new();
+        List<Task<Models.Statistic>> tasks = new();
         
         // Создаём статистику.
         foreach (var group in groups)
         {
-            Task<Statistic> task = Task.Run(() =>
+            Task<Models.Statistic> task = Task.Run(() =>
                 {
                     var activities = group.ToArray();
                     int activitiesCount = activities.Length;
@@ -44,6 +60,19 @@ public static class TelemetryStatistic
                             x => GetDbTime(x).Ticks
                         );
             
+                    // Общее время работы на алгоритмику и запросы к БД.
+                    TimeSpan thisTotalTime, thisTotalDbTime, thisTotalAlgoTime;
+                    thisTotalTime = thisTotalDbTime = thisTotalAlgoTime = TimeSpan.Zero;
+                    foreach (var item in activities)
+                    {
+                        var thisDbTime = new TimeSpan(telemetryToDbTime[item]);
+            
+                        thisTotalTime += item.ActivityDuration;
+                        thisTotalDbTime += thisDbTime;
+                        thisTotalAlgoTime += item.ActivityDuration - thisDbTime;
+                    }
+                    
+                    
                     // Среднее время на работу с БД.
                     TimeSpan avgDbTime = new TimeSpan(activities.Select(x => (int)(telemetryToDbTime[x] / activitiesCount)).Sum());
             
@@ -58,9 +87,13 @@ public static class TelemetryStatistic
                     // Из времени алгоритмической активности исключено время выполнения подактивностей.
                     // Т.е только время разных обработок считается.
                     // БД запросы исключены отсюда.
+
+                    if (group.Key.SourceName.Contains("Substation"))
+                        ;
+                    
                     var top5 = activities
                         .CreateFlat()
-                        .Select(x => (x.ActivityDuration - x.ChildrensDuration ?? TimeSpan.Zero, x.ActivityName))
+                        .Select(x => (x.ActivityDuration - (x.ChildrensDuration ?? TimeSpan.Zero), x.ActivityName))
                         .ToArray()
                         .GroupBy(x => x.ActivityName)
                         .Select(x => new ActivityStatistic()
@@ -78,13 +111,16 @@ public static class TelemetryStatistic
                         .Select(x => (x.ActivityDuration - x.ChildrensDuration ?? TimeSpan.Zero, x.ActivityName))
                         .ToArray();
 
-                    return new Statistic()
+                    return new Models.Statistic()
                     {
                         ActivityName = group.Key.ActivityName,
                         SourceName = group.Key.SourceName,
                         AvgAlgoTime = avgAlgoTime,
                         AvgDbTime = avgDbTime,
                         AvgTime = avgTime,
+                        TotalTime = thisTotalTime,
+                        TotalDbTime = thisTotalDbTime,
+                        TotalAlgoTime = thisTotalAlgoTime,
                         Top5TimeLessActivities = top5
                     };
                 }
@@ -93,8 +129,29 @@ public static class TelemetryStatistic
             tasks.Add(task);
         }
         
-        // Дожидаемся результатов
-        return tasks.Select(x => x.Result).ToArray();
+        // Формируем общее время, затраченное на разные вещи по всей интеграции.
+        TimeSpan totalTime, totalDbTime, totalAlgoTime;
+        totalTime = totalDbTime = totalAlgoTime = TimeSpan.Zero;
+        
+        foreach (var item in telemetryItems)
+        {
+            var thisDbTime = GetDbTime(item);
+            
+            totalTime += item.ActivityDuration;
+            totalDbTime += thisDbTime;
+            totalAlgoTime += item.ActivityDuration - thisDbTime;
+        }
+        
+        // Создаём отчёт.
+        Report report = new Report()
+        {
+            Statistics = tasks.Select(x => x.Result).ToArray(),
+            TotalTime = totalTime,
+            TotalAlgoTime = totalAlgoTime,
+            TotalDbTime = totalDbTime
+        };
+        
+        return report;
     }
 
     private static void CompareTwoTelemetries(TelemetryItem[] first, TelemetryItem[] second)

@@ -1,22 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemetrySetterBase", "TelemetrySetterBase\TelemetrySetterBase.csproj", "{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelemetrySetterBase", "TelemetrySetterBase\TelemetrySetterBase.csproj", "{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSaver", "FileSaver\FileSaver.csproj", "{BD4AC402-A06B-4092-B53A-EF01792C470F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSaver", "FileSaver\FileSaver.csproj", "{BD4AC402-A06B-4092-B53A-EF01792C470F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Savers", "Savers", "{E5BCC304-E7A3-4C81-93AE-6050302BF0B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TelemetrySetters", "TelemetrySetters", "{87445E0C-633B-482A-8D4C-57861814EE08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetrySetter", "OpenTelemetrySetter\OpenTelemetrySetter.csproj", "{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTelemetrySetter", "OpenTelemetrySetter\OpenTelemetrySetter.csproj", "{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelemetrySetterManager", "TelemetrySetterManager\TelemetrySetterManager.csproj", "{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelemetrySetterManager", "TelemetrySetterManager\TelemetrySetterManager.csproj", "{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TelemetryCollectors", "TelemetryCollectors", "{CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectorBase", "CollectorBase\CollectorBase.csproj", "{4EDD9C03-C766-419E-99C1-51635EF680BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectorBase", "CollectorBase\CollectorBase.csproj", "{4EDD9C03-C766-419E-99C1-51635EF680BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectorConsole", "CollectorConsole\CollectorConsole.csproj", "{83F6382D-76E7-4864-8647-17675D0B0D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectorConsole", "CollectorConsole\CollectorConsole.csproj", "{83F6382D-76E7-4864-8647-17675D0B0D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collector.Api", "Collector.Api\Collector.Api.csproj", "{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,13 +53,24 @@ Global
 		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F6382D-76E7-4864-8647-17675D0B0D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BD4AC402-A06B-4092-B53A-EF01792C470F} = {E5BCC304-E7A3-4C81-93AE-6050302BF0B7}
 		{9C897DA4-214A-4BE4-ACD1-8649B1EB9EA3} = {87445E0C-633B-482A-8D4C-57861814EE08}
+		{BD4AC402-A06B-4092-B53A-EF01792C470F} = {E5BCC304-E7A3-4C81-93AE-6050302BF0B7}
 		{A7F4AF23-77C3-4039-95E5-54D9F8A2D6E3} = {87445E0C-633B-482A-8D4C-57861814EE08}
 		{22494B4C-50C2-44F2-AA7A-DAB4C9745DC0} = {87445E0C-633B-482A-8D4C-57861814EE08}
 		{4EDD9C03-C766-419E-99C1-51635EF680BE} = {CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}
 		{83F6382D-76E7-4864-8647-17675D0B0D6A} = {CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}
+		{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC} = {CEFDFC2C-0682-4A1D-B695-F2BD90ECCF32}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E6952B3-96AB-44FF-9FFE-7340FBA6C85D}
 	EndGlobalSection
 EndGlobal

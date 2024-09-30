@@ -21,7 +21,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectorBase", "CollectorB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectorConsole", "CollectorConsole\CollectorConsole.csproj", "{83F6382D-76E7-4864-8647-17675D0B0D6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collector.Api", "Collector.Api\Collector.Api.csproj", "{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Collector.Api", "Collector.Api\Collector.Api.csproj", "{8E1A2893-9ED9-47D7-8A40-5421EA49F0DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E84916D-BFAE-46C5-9E7E-6EB55DB90908}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

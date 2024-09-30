@@ -1,0 +1,2 @@
+1) docker build -t open-telemetry-service .
+2) В директории с OpenTelemetryServiceDeployment ввести docker compose up -d

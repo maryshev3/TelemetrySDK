@@ -54,7 +54,7 @@ public class CollectorController : ControllerBase
     }
     
     [HttpPost("get-statistics")]
-    [ProducesResponseType(typeof(TelemetryItem[]), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetStatistics([FromBody] TelemetryItem[] telemetriesTree)
     {
         try

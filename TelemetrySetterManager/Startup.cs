@@ -46,13 +46,24 @@ public static class Startup
     /// </summary>
     public static void Main()
     {
-        // Считываем настройки сбора телеметрии.
-        Settings settings = ReadSettings(_settingsPath);
-        
-        // Получаем менеджер для сохранения телеметрии.
-        ISaveManager saveManager = GetSaver(settings.SaverType);
-        
-        // Запускаем сбор телеметрии.
-        RunTelemetrySetter(settings.TelemetrySetterType, saveManager);
+        try
+        {
+            Console.WriteLine("Starting TelemetrySetterManager");
+
+            // Считываем настройки сбора телеметрии.
+            Settings settings = ReadSettings(_settingsPath);
+
+            // Получаем менеджер для сохранения телеметрии.
+            ISaveManager saveManager = GetSaver(settings.SaverType);
+
+            // Запускаем сбор телеметрии.
+            RunTelemetrySetter(settings.TelemetrySetterType, saveManager);
+
+            Console.WriteLine("TelemetrySetterManager inited");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 }

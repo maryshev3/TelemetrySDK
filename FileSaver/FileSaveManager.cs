@@ -62,6 +62,8 @@ public class FileSaveManager : ISaveManager
     {
         lock (_locker)
         {
+            CreateFileIfNotExist(_savePath);
+
             SaveTelemetry(telemetryItem);
         }
     }

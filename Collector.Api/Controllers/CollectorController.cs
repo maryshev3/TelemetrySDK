@@ -70,4 +70,24 @@ public class CollectorController : ControllerBase
             return BadRequest(ModelState);
         }
     }
+
+    [HttpPost("get-statistics-from-file")]
+    [ProducesResponseType(typeof(Report), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetStatistics(IFormFile telemetriesFile)
+    {
+        try
+        {
+            TelemetryItem[] telemetriesTree = _collectorService.FlatToTree(telemetriesFile);
+
+            Report report = await _collectorService.GetStatistics(telemetriesTree);
+
+            return Ok(report);
+        }
+        catch (Exception exception)
+        {
+            ModelState.AddModelError("Error", exception.ToString());
+
+            return BadRequest(ModelState);
+        }
+    }
 }

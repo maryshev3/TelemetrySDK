@@ -1,6 +1,8 @@
 using Collector.Api.Services;
 using CollectorBase;
 using CollectorBase.Statistic;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Collector.Api;
 
@@ -21,6 +23,18 @@ public class Program
         builder.Services.AddSingleton<CollectorService>();
         builder.Services.AddSingleton<Settings>(x => Settings.Init());
         builder.Services.AddSingleton<TelemetryStatistic>();
+
+        builder.Services.Configure<FormOptions>(x =>
+        {
+            x.ValueLengthLimit = int.MaxValue;
+            x.MultipartBodyLengthLimit = int.MaxValue; // if don't set default value is: 128 MB
+            x.MultipartHeadersLengthLimit = int.MaxValue;
+        });
+
+        builder.Services.Configure<KestrelServerOptions>(options =>
+        {
+            options.Limits.MaxRequestBodySize = int.MaxValue;
+        });
 
         var app = builder.Build();
 

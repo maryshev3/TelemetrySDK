@@ -5,6 +5,7 @@ using CollectorBase.Extensions;
 using CollectorBase.Models;
 using Newtonsoft.Json;
 using TelemetrySetterBase.Models;
+using System.Text;
 
 namespace Collector.Api.Controllers;
 
@@ -18,14 +19,18 @@ public class CollectorController : ControllerBase
     }
     
     [HttpPost("flat-to-tree-from-file")]
-    [ProducesResponseType(typeof(TelemetryItem[]), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
     public IActionResult FlatToTree(IFormFile telemetriesFile)
     {
         try
         {
             TelemetryItem[] telemetriesTree = _collectorService.FlatToTree(telemetriesFile);
+
+            string jsonContent = JsonConvert.SerializeObject(telemetriesTree);
+
+            byte[] bytes = Encoding.UTF8.GetBytes(jsonContent);
         
-            return Ok(telemetriesTree);
+            return File(bytes, "text/json", "telemetries_tree.json");
         }
         catch (Exception exception)
         {
